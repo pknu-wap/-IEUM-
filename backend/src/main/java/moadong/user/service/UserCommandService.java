@@ -1,6 +1,7 @@
 package moadong.user.service;
 
 import com.mongodb.MongoWriteException;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import moadong.global.exception.ErrorCode;
 import moadong.global.exception.RestApiException;
@@ -8,9 +9,10 @@ import moadong.global.util.JwtProvider;
 import moadong.user.entity.User;
 import moadong.user.payload.request.UserLoginRequest;
 import moadong.user.payload.request.UserRegisterRequest;
-import moadong.user.payload.response.UserLoginResponse;
+import moadong.user.payload.response.AccessTokenResponse;
 import moadong.user.repository.UserInformationRepository;
 import moadong.user.repository.UserRepository;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -37,7 +39,7 @@ public class UserCommandService {
         }
     }
 
-    public UserLoginResponse loginUser(UserLoginRequest userLoginRequest){
+    public AccessTokenResponse loginUser(UserLoginRequest userLoginRequest, HttpServletResponse response) {
         try {
             Authentication authenticate = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(userLoginRequest.email(), userLoginRequest.password()));
@@ -45,9 +47,30 @@ public class UserCommandService {
             UserDetails userDetails = (UserDetails) authenticate.getPrincipal();
             String accessToken = jwtProvider.generateAccessToken(userDetails.getUsername());
             String refreshToken = jwtProvider.generateRefreshToken(userDetails.getUsername());
-            return new UserLoginResponse(accessToken,refreshToken);
-        } catch (MongoWriteException e){
+
+            ResponseCookie cookie = ResponseCookie.from("refresh_token", refreshToken)
+                    .httpOnly(true)
+                    .path("/")
+                    .maxAge(7 * 24 * 60 * 60)
+                    .secure(true)
+                    .build();
+            response.addHeader("Set-Cookie", cookie.toString());
+
+            return new AccessTokenResponse(accessToken);
+        } catch (MongoWriteException e) {
             throw new RestApiException(ErrorCode.USER_ALREADY_EXIST);
         }
+    }
+
+    public AccessTokenResponse refreshAccessToken(String refreshToken) {
+        if (refreshToken.isBlank() ||
+                !jwtProvider.validateToken(refreshToken, jwtProvider.extractUsername(refreshToken))) {
+            throw new RestApiException(ErrorCode.TOKEN_INVALID);
+        }
+        String userId = jwtProvider.extractUsername(refreshToken);
+        String accessToken = jwtProvider.generateAccessToken(userId);
+        return new AccessTokenResponse(accessToken);
+
+
     }
 }

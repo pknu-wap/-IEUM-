@@ -3,9 +3,11 @@ package moadong.global.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.security.Key;
 import java.util.Date;
 
 @Component
@@ -16,6 +18,7 @@ public class JwtProvider {
     private int REFRESH_EXPIRATION_HOUR;
     @Value("${jwt.secret.key}")
     private String SECRET_KEY;
+
     public String generateAccessToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
@@ -49,11 +52,24 @@ public class JwtProvider {
         return (username.equals(extractUsername(token)) && !isTokenExpired(token));
     }
 
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     // Claims 추출
     private Claims getClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    private Key getSigningKey() {
+        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 }
