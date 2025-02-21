@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import moadong.global.annotation.UserId;
 import moadong.user.entity.enums.UserStatus;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -31,9 +32,8 @@ public class User implements UserDetails {
 
     @Indexed(unique = true)
     @NotNull
-    @Email
-    @Size(min = 5, max = 50)
-    private String email;
+    @UserId
+    private String userId;
 
     @NotNull
     @Size(min = 8, max = 20)
@@ -65,6 +65,6 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return userId;
     }
 }

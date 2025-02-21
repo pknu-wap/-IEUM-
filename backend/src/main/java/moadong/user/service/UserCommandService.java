@@ -42,7 +42,7 @@ public class UserCommandService {
     public AccessTokenResponse loginUser(UserLoginRequest userLoginRequest, HttpServletResponse response) {
         try {
             Authentication authenticate = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(userLoginRequest.email(), userLoginRequest.password()));
+                    new UsernamePasswordAuthenticationToken(userLoginRequest.userId(), userLoginRequest.password()));
 
             UserDetails userDetails = (UserDetails) authenticate.getPrincipal();
             String accessToken = jwtProvider.generateAccessToken(userDetails.getUsername());
