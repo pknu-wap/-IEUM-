@@ -7,7 +7,7 @@ import moadong.global.annotation.Korean;
 import java.util.regex.Pattern;
 
 public class KoreanValidator implements ConstraintValidator<Korean, String> {
-    private static final Pattern KOREAN_ONLY_PATTERN = Pattern.compile("^[가-힣]+$");
+    private static final Pattern KOREAN_ONLY_PATTERN = Pattern.compile("^[가-힣]{1,10}$");
 
     @Override
     public boolean isValid(String string, ConstraintValidatorContext constraintValidatorContext) {
