@@ -52,15 +52,6 @@ public class JwtProvider {
         return (username.equals(extractUsername(token)) && !isTokenExpired(token));
     }
 
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     // Claims 추출
     private Claims getClaims(String token) {
         return Jwts.parser()
