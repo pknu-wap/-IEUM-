@@ -1,4 +1,4 @@
-package moadong.user.payload;
+package moadong.user.payload.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -22,7 +22,7 @@ public record UserRegisterRequest(
         @PhoneNumber
         String phoneNumber
 ) {
-    public User toUserEntity() {
+    public User toUserEntity(String password) {
         return User.builder()
                 .email(email)
                 .password(password)

@@ -2,10 +2,11 @@ package moadong.user.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import moadong.global.payload.Response;
-import moadong.user.payload.UserRegisterRequest;
+import moadong.user.payload.request.UserLoginRequest;
+import moadong.user.payload.request.UserRegisterRequest;
+import moadong.user.payload.response.UserLoginResponse;
 import moadong.user.service.UserCommandService;
 import moadong.user.view.UserSwaggerView;
 import org.springframework.http.ResponseEntity;
@@ -31,4 +32,11 @@ public class UserController {
         userCommandService.registerUser(request);
         return Response.ok("success register");
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody @Validated UserLoginRequest request) {
+        UserLoginResponse userLoginResponse = userCommandService.loginUser(request);
+        return Response.ok(userLoginResponse);
+    }
+
 }

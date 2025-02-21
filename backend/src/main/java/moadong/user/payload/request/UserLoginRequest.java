@@ -1,4 +1,4 @@
-package moadong.user.payload;
+package moadong.user.payload.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
