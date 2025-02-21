@@ -1,20 +1,14 @@
 import React, { useEffect } from 'react';
 import Header from '@/components/common/Header/Header';
 import BackNavigationBar from '@/pages/ClubDetailPage/components/BackNavigationBar/BackNavigationBar';
-import ClubProfile from '@/pages/ClubDetailPage/components/ClubProfile/ClubProfile';
-import ClubApplyButton from '@/pages/ClubDetailPage/components/ClubApplyButton/ClubApplyButton';
+import ClubDetailHeader from '@/pages/ClubDetailPage/components/ClubDetailHeader/ClubDetailHeader';
 import InfoTabs from '@/pages/ClubDetailPage/components/InfoTabs/InfoTabs';
 import InfoBox from '@/pages/ClubDetailPage/components/InfoBox/InfoBox';
 import IntroduceBox from '@/pages/ClubDetailPage/components/IntroduceBox/IntroduceBox';
-import DeadlineBadge from '@/pages/ClubDetailPage/components/DeadlineBadge/DeadlineBadge';
 import Footer from '@/components/@common/Footer/Footer';
+import ClubDetailFooter from '@/pages/ClubDetailPage/components/ClubDetailFooter/ClubDetailFooter';
 import * as Styled from '@/styles/PageContainer.styles';
-import './ClubDetailPage.styles';
 import useAutoScroll from '@/hooks/useAutoScroll';
-import {
-  ClubDetailFooterContainer,
-  ClubDetailHeaderContainer,
-} from '@/pages/ClubDetailPage/ClubDetailPage.styles';
 
 const ClubDetailPage = () => {
   const { sectionRefs, scrollToSection } = useAutoScroll();
@@ -34,24 +28,13 @@ const ClubDetailPage = () => {
       {showHeader && <Header />}
       <BackNavigationBar />
       <Styled.PageContainer>
-        <ClubDetailHeaderContainer>
-          <ClubProfile
-            name={'WAP'}
-            classification={'중동'}
-            division={'학술'}
-            tags={['프로젝트', '소프트웨어']}
-          />
-          <ClubApplyButton />
-        </ClubDetailHeaderContainer>
+        <ClubDetailHeader />
         <InfoTabs onTabClick={scrollToSection} />
         <InfoBox sectionRefs={sectionRefs} />
         <IntroduceBox sectionRefs={sectionRefs} />
         <Footer />
       </Styled.PageContainer>
-      <ClubDetailFooterContainer>
-        <DeadlineBadge />
-        <ClubApplyButton />
-      </ClubDetailFooterContainer>
+      <ClubDetailFooter />
     </>
   );
 };
