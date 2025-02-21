@@ -47,11 +47,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable()) // CSRF 비활성화
-                .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll() // 모든 요청에 대해 인증 해제
-                );
+            .csrf(csrf -> csrf.disable()) // CSRF 비활성화
+            .authorizeHttpRequests(authorize -> authorize
+                .anyRequest().permitAll() // 모든 요청에 대해 인증 해제
+            );
 
         http.addFilterBefore(new JwtAuthenticationFilter(jwtProvider, userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
@@ -91,5 +90,4 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-
 }
