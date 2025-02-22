@@ -5,10 +5,12 @@ export const InfoBoxWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   gap: 50px;
-  margin-top: 80px; // [x]FIXME : margin 다시 조정
+  margin-top: 100px;
 
   @media (max-width: 500px) {
     flex-direction: column;
+    gap: 0px;
+    margin-top: 40px;
   }
 `;
 

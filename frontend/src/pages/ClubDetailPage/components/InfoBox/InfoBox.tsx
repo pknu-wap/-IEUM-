@@ -6,7 +6,7 @@ const infoData: InfoList[] = [
   {
     title: '모집정보',
     descriptions: [
-      { label: '모집기간', value: '2025.02.28' },
+      { label: '모집기간', value: '2025.02.24' },
       { label: '모집대상', value: '부경대학교 재학생' },
     ],
   },

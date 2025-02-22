@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const InfoTabWrapper = styled.div`
   display: none;
-  position: fixed;
-  margin-top: -40px;
+  position: sticky;
+  top: 89px;
 
   @media (max-width: 500px) {
     display: flex;
@@ -11,6 +11,7 @@ export const InfoTabWrapper = styled.div`
     width: 100%;
     height: 45px;
     background-color: white;
+    margin-top: 40px;
   }
 `;
 

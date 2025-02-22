@@ -12,10 +12,10 @@ export const IntroduceBoxWrapper = styled.div`
   gap: 30px;
 
   @media (max-width: 500px) {
+    margin-top: 0;
     width: 100%;
     border: none;
     border-radius: 0;
-    border-bottom: 1px solid #dcdcdc;
   }
 `;
 

@@ -5,7 +5,7 @@ export const FooterContainer = styled.footer`
   font-size: 0.75rem;
   padding: 0 140px;
 
-  @media (max-width: 499px) {
+  @media (max-width: 500px) {
     padding: 0 20px;
   }
 `;
@@ -22,7 +22,7 @@ export const FooterContent = styled.div`
   line-height: 1.25rem;
   color: #818181;
 
-  @media (max-width: 499px) {
+  @media (max-width: 500px) {
     font-size: 0.625rem;
   }
 `;

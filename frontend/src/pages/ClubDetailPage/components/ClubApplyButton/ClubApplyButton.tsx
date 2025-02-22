@@ -27,7 +27,7 @@ const Button = styled.button`
     transform: scale(1.03);
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 500px) {
     width: 256px;
     height: 44px;
     font-size: 1rem;

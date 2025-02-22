@@ -5,7 +5,7 @@ const ClubContainer = styled.div`
   align-items: center;
   gap: 21px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 500px) {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto auto;
@@ -22,7 +22,7 @@ const ClubInfo = styled.div`
   justify-content: space-between;
   height: auto;
 
-  @media (max-width: 480px) {
+  @media (max-width: 500px) {
     display: contents;
   }
 `;
@@ -32,7 +32,7 @@ const ClubName = styled.p`
   font-weight: bold;
   color: #000;
 
-  @media (max-width: 480px) {
+  @media (max-width: 500px) {
     font-size: 1.875rem;
     grid-area: name;
   }
@@ -43,7 +43,7 @@ const TagContainer = styled.div`
   flex-wrap: wrap;
   gap: 8px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 500px) {
     gap: 6px;
     grid-area: tags;
   }
