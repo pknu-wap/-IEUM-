@@ -35,8 +35,8 @@ public class SecurityConfig {
     private final CustomUserDetailService userDetailsService;
     @Value("${spring.cloud.gcp.credentials.location}")
     private String credentialsLocation;
-    @Value("${frontend.domain}")
-    private String frontendDomain;
+//    @Value("${frontend.domain}")
+//    private String frontendDomain;
 
     public SecurityConfig(JwtProvider jwtProvider, CustomUserDetailService userDetailsService) {
         this.jwtProvider = jwtProvider;
@@ -52,7 +52,7 @@ public class SecurityConfig {
                 .anyRequest().permitAll() // 모든 요청에 대해 인증 해제
             );
 
-        http.addFilterBefore(new JwtAuthenticationFilter(jwtProvider, userDetailsService), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(new JwtAuthenticationFilter(jwtProvider, userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
 
         return http.build();
@@ -67,20 +67,20 @@ public class SecurityConfig {
                 .getService();
     }
 
-    @Bean
-    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList(frontendDomain, "http://localhost:*", "https://deploy-preview-76--moadong.netlify.app/"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
-        configuration.setExposedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
+//    @Bean
+//    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOriginPatterns(Arrays.asList(frontendDomain, "http://localhost:*", "https://deploy-preview-76--moadong.netlify.app/"));
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+//        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
+//        configuration.setExposedHeaders(Arrays.asList("Authorization", "Content-Type"));
+//        configuration.setAllowCredentials(true);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
+//
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
