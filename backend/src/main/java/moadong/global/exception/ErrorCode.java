@@ -13,6 +13,11 @@ public enum ErrorCode {
     TOO_MANY_FILES(HttpStatus.PAYLOAD_TOO_LARGE, "601-3", "이미지 파일이 최대치보다 많습니다."),
     IMAGE_DELETE_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "601-4", "이미지 삭제에 실패하였습니다"),
     KOREAN_FILE_NAME(HttpStatus.INTERNAL_SERVER_ERROR, "601-5", "파일명의 한국어를 인코딩할 수 없습니다."),
+    USER_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "700-1","이미 존재하는 계정입니다."),
+    USER_NOT_EXIST(HttpStatus.BAD_REQUEST, "700-2","존재하지 않는 계정입니다."),
+    USER_INVALID_FORMAT(HttpStatus.BAD_REQUEST, "700-3","올바르지 않은 유저 형식입니다."),
+    USER_INVALID_LOGIN(HttpStatus.BAD_REQUEST, "700-4","올바르지 않은 로그인"),
+    TOKEN_INVALID(HttpStatus.BAD_REQUEST, "701-1", "올바르지 않은 토큰 양식입니다."),
     ;
 
     private final HttpStatus httpStatus;
