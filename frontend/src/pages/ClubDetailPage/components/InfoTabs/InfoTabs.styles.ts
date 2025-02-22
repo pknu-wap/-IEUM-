@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const InfoTabWrapper = styled.div`
   display: none;
   position: sticky;
-  top: 89px;
+  top: 70px;
 
   @media (max-width: 500px) {
     display: flex;
