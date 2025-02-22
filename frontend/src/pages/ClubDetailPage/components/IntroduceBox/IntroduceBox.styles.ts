@@ -30,6 +30,10 @@ export const IntroduceContentBox = styled.div`
   flex-direction: column;
   gap: 15px;
 
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+
   ol {
     padding-left: 20px;
   }

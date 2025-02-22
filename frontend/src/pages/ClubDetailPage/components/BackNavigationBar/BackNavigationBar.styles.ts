@@ -10,7 +10,7 @@ export const BackNavigationContainer = styled.div`
     flex-direction: row;
     align-items: center;
     width: 100%;
-    height: 89px;
+    height: 70px;
 
     background-color: white;
   }
