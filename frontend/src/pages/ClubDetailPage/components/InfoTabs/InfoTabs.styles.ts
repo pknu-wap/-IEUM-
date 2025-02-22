@@ -22,9 +22,11 @@ export const InfoTabButton = styled.button`
   background-color: transparent;
   cursor: pointer;
   font-size: 14px;
+  color: #cdcdcd;
   transition: border-bottom 0.3s ease;
 
   &.active {
     border-bottom: 2px solid black;
+    color: black;
   }
 `;
