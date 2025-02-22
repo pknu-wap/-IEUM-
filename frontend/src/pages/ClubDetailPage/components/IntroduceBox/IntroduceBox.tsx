@@ -3,6 +3,7 @@ import * as Styled from './IntroduceBox.styles';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm'; // 링크 및 마크다운 확장 지원
 import rehypeRaw from 'rehype-raw'; // HTML 태그를 지원하려면 필요
+import rehypeSanitize from 'rehype-sanitize';
 
 const markdownContent = `
 ### 💻 프로그래밍 중앙 동아리 WAP 30기 신입 개발자 회원 모집 💻
@@ -66,7 +67,7 @@ const IntroduceBox = ({
       <Styled.IntroduceContentBox>
         <ReactMarkdown
           remarkPlugins={[remarkGfm]} // GitHub 마크다운 지원
-          rehypePlugins={[rehypeRaw]} // HTML 태그 지원
+          rehypePlugins={[rehypeRaw, rehypeSanitize]} // HTML 태그 지원
           components={{
             a: ({ node, ...props }) => (
               <a {...props} target='_blank' rel='noopener noreferrer' />
