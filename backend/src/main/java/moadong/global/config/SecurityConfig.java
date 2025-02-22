@@ -1,5 +1,7 @@
 package moadong.global.config;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
@@ -48,6 +50,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable()) // CSRF 비활성화
+            .cors(withDefaults())
             .authorizeHttpRequests(authorize -> authorize
                 .anyRequest().permitAll() // 모든 요청에 대해 인증 해제
             );
