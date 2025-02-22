@@ -8,7 +8,7 @@ const useAutoScroll = () => {
   const scrollToSection = (index: number) => {
     if (sectionRefs.current[index]) {
       const element = sectionRefs.current[index];
-      const yOffset = -120;
+      const yOffset = -110;
 
       window.scrollTo({
         top: element.getBoundingClientRect().top + window.scrollY + yOffset,
