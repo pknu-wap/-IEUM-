@@ -15,7 +15,8 @@ public record ClubUpdateRequest(
     String clubPresidentName,
     String telephoneNumber,
     LocalDateTime recruitmentStart,
-    LocalDateTime recruitmentEnd
+    LocalDateTime recruitmentEnd,
+    String recruitmentTarget
 ) {
 
 }

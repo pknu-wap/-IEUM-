@@ -50,6 +50,8 @@ public class ClubInformation {
 
     private LocalDateTime recruitmentEnd;
 
+    private String recruitmentTarget;
+
     @Enumerated(EnumType.STRING)
     @NotNull
     private RecruitmentStatus recruitmentStatus;
@@ -62,6 +64,7 @@ public class ClubInformation {
         this.presidentTelephoneNumber = request.telephoneNumber();
         this.recruitmentStart = request.recruitmentStart();
         this.recruitmentEnd = request.recruitmentEnd();
+        this.recruitmentTarget = request.recruitmentTarget();
         this.recruitmentStatus = RecruitmentStatus.UPCOMING;
     }
 
