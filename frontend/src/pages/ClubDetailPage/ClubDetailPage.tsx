@@ -32,8 +32,8 @@ const ClubDetailPage = () => {
         <InfoTabs onTabClick={scrollToSection} />
         <InfoBox sectionRefs={sectionRefs} />
         <IntroduceBox sectionRefs={sectionRefs} />
-        <Footer />
       </Styled.PageContainer>
+      <Footer />
       <ClubDetailFooter />
     </>
   );
