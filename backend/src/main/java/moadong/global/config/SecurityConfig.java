@@ -5,6 +5,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
+import java.io.IOException;
+import java.io.InputStream;
 import moadong.global.util.JwtAuthenticationFilter;
 import moadong.global.util.JwtProvider;
 import moadong.user.service.CustomUserDetailService;
@@ -21,12 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
