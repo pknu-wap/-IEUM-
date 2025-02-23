@@ -4,6 +4,11 @@ export const CategoryButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
+  margin-top: 60px;
+
+  @media (max-width: 500px) {
+    margin-top: 42px;
+  }
 `;
 
 export const CategoryButton = styled.button`
