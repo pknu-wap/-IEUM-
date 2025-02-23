@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SidebarWrapper = styled.div`
+export const SidebarWrapper = styled.aside`
     display: flex;
     flex-direction: column;
     align-items: left;
