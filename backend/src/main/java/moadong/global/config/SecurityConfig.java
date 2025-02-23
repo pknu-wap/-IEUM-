@@ -37,14 +37,11 @@ public class SecurityConfig {
     private final CustomUserDetailService userDetailsService;
     @Value("${spring.cloud.gcp.credentials.location}")
     private String credentialsLocation;
-    @Value("${frontend.domain}")
-    private String frontendDomain;
 
     public SecurityConfig(JwtProvider jwtProvider, CustomUserDetailService userDetailsService) {
         this.jwtProvider = jwtProvider;
         this.userDetailsService = userDetailsService;
     }
-
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -68,20 +65,6 @@ public class SecurityConfig {
                 .setCredentials(GoogleCredentials.fromStream(keyFile))
                 .build()
                 .getService();
-    }
-
-    @Bean
-    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList(frontendDomain, "http://localhost:*", "https://deploy-preview-76--moadong.netlify.app/"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
-        configuration.setExposedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
     }
 
     @Bean
