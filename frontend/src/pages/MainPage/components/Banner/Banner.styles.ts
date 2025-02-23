@@ -8,7 +8,7 @@ export const BannerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 90px;
   position: relative;
 `;
 
