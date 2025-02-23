@@ -9,8 +9,8 @@ export const MobileHeaderContainer = styled.header`
     top: 0;
     left: 0;
     right: 0;
-    height: 70px;
-    padding: 0 20px;
+    height: 46px;
+    padding: 10px 20px;
     max-width: 500px;
     margin: 0 auto;
     z-index: 2;
