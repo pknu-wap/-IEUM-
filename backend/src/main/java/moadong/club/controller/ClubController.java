@@ -57,6 +57,7 @@ public class ClubController {
         ClubDetailedResponse clubDetailedPageResponse = clubDetailedPageService.getClubDetailedPage(clubId);
         return Response.ok(clubDetailedPageResponse);
     }
+
     @GetMapping("/search/")
     @Operation(summary = "키워드에 맞는 클럽을 검색합니다.(모집,분과,종류에 따른 구분)",
             description = "모집,분과,종류에 필터링 이후 이름,태그,소개에 따라 검색합니다.<br>"
