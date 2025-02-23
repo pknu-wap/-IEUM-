@@ -2,10 +2,7 @@ package moadong.club.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
-import java.util.List;
 import lombok.AllArgsConstructor;
-import moadong.club.payload.response.ClubDetailedResponse;
 import moadong.club.service.ClubMetricService;
 import moadong.global.payload.Response;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +23,7 @@ public class ClubMetricController {
     @Operation(summary = "클럽 일일 통계 조회", description = "클럽 일일 통계를 조회합니다.<br>"
         + "30일 이내의 통계를 조회합니다.")
     public ResponseEntity<?> getDailyActiveUserWitClub(@PathVariable String clubId) {
-        List<Integer> metric = clubMetricService.getDailyActiveUserWitClub(clubId);
+        int[] metric = clubMetricService.getDailyActiveUserWitClub(clubId);
         return Response.ok(metric);
     }
 

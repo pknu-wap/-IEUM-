@@ -2,8 +2,6 @@ package moadong.club.service;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -18,23 +16,26 @@ public class ClubMetricService {
     private final ClubMetricRepository clubMetricRepository;
 
     public void patch(String clubId, String remoteAddr) {
-        LocalDate nowDate = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).toLocalDate();
+        LocalDate nowDate = LocalDate.now();
         Optional<ClubMetric> optional = clubMetricRepository.findByClubIdAndIpAndDate(
             clubId, remoteAddr, nowDate);
 
+        ClubMetric metric;
         if (optional.isPresent()) {
-            optional.get().update();
+            metric = optional.get();
+            metric.update();
         } else {
-            clubMetricRepository.save(ClubMetric.builder()
+            metric = ClubMetric.builder()
                 .clubId(clubId)
                 .ip(remoteAddr)
-                .build());
+                .build();
         }
+        clubMetricRepository.save(metric);
 
     }
 
-    public List<Integer> getDailyActiveUserWitClub(String clubId) {
-        LocalDate now = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).toLocalDate();
+    public int[] getDailyActiveUserWitClub(String clubId) {
+        LocalDate now = LocalDate.now();
         //해당 클럽에 대해 30일 전까지의 통계를 모두 불러온다
         LocalDate from = now.minusDays(30);
         List<ClubMetric> metrics = clubMetricRepository.findByClubIdAndDateAfter(clubId, from);
@@ -47,6 +48,6 @@ public class ClubMetricService {
             dailyMetric[period.getDays()]++;
         }
 
-        return null;
+        return dailyMetric;
     }
 }
