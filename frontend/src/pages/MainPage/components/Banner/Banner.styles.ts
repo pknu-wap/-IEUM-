@@ -10,6 +10,10 @@ export const BannerContainer = styled.div`
   align-items: center;
   margin-top: 90px;
   position: relative;
+
+  @media (max-width: 500px) {
+    margin-top: 42px;
+  }
 `;
 
 export const BannerWrapper = styled.div<BannerProps>`
