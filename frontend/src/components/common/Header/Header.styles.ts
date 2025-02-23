@@ -9,7 +9,7 @@ export const HeaderStyles = styled.header`
   padding: 0 40px;
   max-width: 1180px;
   margin: 0 auto;
-  z-index: 1;
+  z-index: 2;
   background-color: white;
 
   @media (max-width: 500px) {

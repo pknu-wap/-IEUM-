@@ -58,7 +58,7 @@ export const ButtonContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   transform: translateY(-50%);
-  z-index: 10;
+  z-index: 1;
 `;
 
 export const SlideButton = styled.button`
