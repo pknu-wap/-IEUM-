@@ -62,10 +62,10 @@ export const ButtonContainer = styled.div`
 `;
 
 export const SlideButton = styled.button`
-  background-color: transparent;
-  color: black;
-  border: none;
+  width: 60px;
+  height: auto;
   padding: 10px 20px;
-  border-radius: 10px;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
 `;
