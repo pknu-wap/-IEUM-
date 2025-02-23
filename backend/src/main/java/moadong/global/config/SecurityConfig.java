@@ -42,15 +42,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(xrequest -> {
-                CorsConfiguration config = new CorsConfiguration();
-                config.setAllowedOriginPatterns(
-                    List.of("http://localhost:8080","http://localhost:3000","https://moadong.netlify.app","https://www.moadong.shop")); // 클라이언트 도메인
-                config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
-                config.setAllowedHeaders(List.of("*"));
-                config.setAllowCredentials(true);
-                return config;
-            }))
             .csrf(csrf -> csrf.disable()) // CSRF 비활성화
             .authorizeHttpRequests(authorize -> authorize
                 .anyRequest().permitAll() // 모든 요청에 대해 인증 해제
