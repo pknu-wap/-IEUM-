@@ -68,4 +68,20 @@ export const SlideButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  @media (max-width: 500px) {
+    width: 35px;
+    padding: 6px 12px;
+  }
+
+  @media (max-width: 375px) {
+    width: 30px;
+    padding: 4px 8px;
+  }
 `;
