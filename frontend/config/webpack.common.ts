@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const configuration: webpack.Configuration = {
@@ -39,6 +40,12 @@ const configuration: webpack.Configuration = {
       template: path.resolve(__dirname, '..', 'public', 'index.html'),
     }),
     new webpack.ProvidePlugin({ React: 'react' }),
+    new Dotenv({
+      path: './.env',
+      systemvars: true,
+      safe: true,
+      ignoreStub: true,
+    }),
   ],
 };
 

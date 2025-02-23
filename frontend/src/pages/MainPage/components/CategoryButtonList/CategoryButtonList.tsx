@@ -34,7 +34,7 @@ const CategoryButtonList = ({ onCategorySelect }: CategoryButtonListProps) => {
       {clubCategories.map((category) => (
         <Styled.CategoryButton
           key={category.id}
-          onClick={() => onCategorySelect(category.name)}>
+          onClick={() => onCategorySelect(category.id)}>
           <img src={category.icon} alt={category.name} />
           <span>{category.name}</span>
         </Styled.CategoryButton>

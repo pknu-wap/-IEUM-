@@ -9,9 +9,9 @@ const CardContainer = styled.div<{ state: string }>`
   width: 100%;
   height: 170px;
   box-shadow: ${({ state }) =>
-    state === '모집중'
-      ? '0 0 14px rgba(0, 166, 255, 0.28)'
-      : '0 0 14px rgba(0, 0, 0, 0.12)'};
+    state === 'open'
+      ? '0 0 14px rgba(0, 166, 255, 0.15)'
+      : '0 0 14px rgba(0, 0, 0, 0.08)'};
 `;
 
 const CardHeader = styled.div`
@@ -36,7 +36,7 @@ const TagsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-const Description = styled.p`
+const Introduction = styled.p`
   font-size: 0.875rem;
   margin: 22px 3px 22px 5px;
   color: rgba(129, 129, 129, 1);
@@ -50,5 +50,5 @@ export {
   ClubProfile,
   ClubName,
   TagsContainer,
-  Description,
+  Introduction,
 };

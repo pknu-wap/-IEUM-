@@ -5,17 +5,17 @@ import ClubStateBox from '@/components/ClubStateBox/ClubStateBox';
 import * as Styled from './ClubCard.styles';
 import { Club } from '@/types/club';
 
-const ClubCard = ({ club }: Club) => {
+const ClubCard = ({ club }: { club: Club }) => {
   return (
-    <Styled.CardContainer state={club.state}>
+    <Styled.CardContainer state={club.recruitmentStatus}>
       <Styled.CardHeader>
         <Styled.ClubProfile>
           <ClubLogo imageSrc={club.logo} />
           <Styled.ClubName>{club.name}</Styled.ClubName>
         </Styled.ClubProfile>
-        <ClubStateBox state={club.state} />
+        <ClubStateBox state={club.recruitmentStatus} />
       </Styled.CardHeader>
-      <Styled.Description>{club.description}</Styled.Description>
+      <Styled.Introduction>{club.introduction}</Styled.Introduction>
       <Styled.TagsContainer>
         <ClubTag type={club.division} />
         <ClubTag type={club.classification} />

@@ -22,7 +22,7 @@ export const CardList = styled.div`
   display: grid;
   width: 100%;
   max-width: 100%;
-  gap: 20px;
+  gap: 35px;
   margin-top: 50px;
   transition:
     gap 0.5s ease,
@@ -39,9 +39,6 @@ export const CardList = styled.div`
   }
   @media (max-width: 500px) {
     gap: 16px;
-  }
-  @media (max-width: 375px) {
-    gap: 10px;
   }
 `;
 

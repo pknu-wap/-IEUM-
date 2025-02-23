@@ -1,61 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
+import { useGetCardList } from '@/hooks/queries/club/useGetCardList';
 import CategoryButtonList from '@/pages/MainPage/components/CategoryButtonList/CategoryButtonList';
 import ClubCard from '@/pages/MainPage/components/ClubCard/ClubCard';
 import StatusRadioButton from '@/pages/MainPage/components/StatusRadioButton/StatusRadioButton';
-import { mockClubs } from '@/apis/mockClubs';
-import * as Styled from './MainPage.styles';
+import Footer from '@/components/@common/Footer/Footer';
+import Header from '@/components/common/Header/Header';
 import Banner from '@/pages/MainPage/components/Banner/Banner';
 import { BannerImageList } from '@/utils/banners';
+import { Club } from '@/types/club';
+import * as Styled from './MainPage.styles';
+
+//Todo
+// 1. 검색 기능 추가
+// 2. 로딩, 에러, 빈 데이터 UI 추가
 
 const MainPage = () => {
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('전체');
-  const [filteredClubs, setFilteredClubs] = useState(mockClubs);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  // const [keyword, setKeyword] = useState('');
 
-  const handleFilterChange = (status: boolean) => {
-    setIsFilterActive(status);
-  };
+  const recruitmentStatus = isFilterActive ? 'open' : 'all';
+  const classification = selectedCategory;
+  const division = 'all';
 
-  const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category);
-  };
+  // 검색 기능 추가 후 ''는 keyword로 대체
+  const {
+    data: clubs,
+    isLoading,
+    error,
+  } = useGetCardList('', recruitmentStatus, classification, division);
 
-  useEffect(() => {
-    let filtered = mockClubs;
+  const hasData = clubs && clubs.length > 0;
 
-    if (isFilterActive) {
-      filtered = filtered.filter(
-        (club) => club.state === '모집중' || club.state === '모집예정',
-      );
-    }
-
-    if (selectedCategory !== '전체') {
-      filtered = filtered.filter(
-        (club) => club.classification === selectedCategory,
-      );
-    }
-
-    setFilteredClubs(filtered);
-  }, [isFilterActive, selectedCategory]);
+  const clubList = useMemo(() => {
+    if (!hasData) return null;
+    return clubs.map((club: Club) => <ClubCard key={club.id} club={club} />);
+  }, [clubs, hasData]);
 
   return (
-    <Styled.PageContainer>
-      <Banner banners={BannerImageList} />
-      <CategoryButtonList onCategorySelect={handleCategorySelect} />
-      <Styled.FilterWrapper>
-        <StatusRadioButton onChange={handleFilterChange} />
-      </Styled.FilterWrapper>
-
-      <Styled.ContentWrapper>
-        <Styled.CardList>
-          {filteredClubs.length > 0 ? (
-            filteredClubs.map((club) => <ClubCard key={club.id} club={club} />)
-          ) : (
-            <p>조건에 맞는 동아리가 없어요</p>
-          )}
-        </Styled.CardList>
-      </Styled.ContentWrapper>
-    </Styled.PageContainer>
+    <>
+      <Header />
+      <Styled.PageContainer>
+        <Banner banners={BannerImageList} />
+        {/* 검색 입력창 추가 */}
+        {/* setKeyword()로 검색 키워드 지정해주면 된다 */}
+        <CategoryButtonList onCategorySelect={setSelectedCategory} />
+        <Styled.FilterWrapper>
+          <StatusRadioButton onChange={setIsFilterActive} />
+        </Styled.FilterWrapper>
+        <Styled.ContentWrapper>
+          <Styled.CardList>
+            {/* 로딩 UI */}
+            {/*isLoading && <Loading />*/}
+            {/* 에러 UI */}
+            {/*error && <ErrorMessage />*/}
+            {/* 빈 데이터 UI */}
+            {/*!isLoading && !error && !hasData && <EmptyState />*/}
+            {!isLoading && !error && hasData && clubList}
+          </Styled.CardList>
+        </Styled.ContentWrapper>
+      </Styled.PageContainer>
+      <Footer />
+    </>
   );
 };
 
