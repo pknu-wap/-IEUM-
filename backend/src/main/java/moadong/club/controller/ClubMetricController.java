@@ -20,10 +20,18 @@ public class ClubMetricController {
     private final ClubMetricService clubMetricService;
 
     @GetMapping("/{clubId}/daily")
-    @Operation(summary = "클럽 일일 통계 조회", description = "클럽 일일 통계를 조회합니다.<br>"
-        + "30일 이내의 통계를 조회합니다.")
+    @Operation(summary = "클럽 일간 통계 조회", description = "클럽 일간 통계를 조회합니다.<br>"
+        + "오늘 부터 30일 이내의 통계를 순서대로 조회합니다.")
     public ResponseEntity<?> getDailyActiveUserWitClub(@PathVariable String clubId) {
         int[] metric = clubMetricService.getDailyActiveUserWitClub(clubId);
+        return Response.ok(metric);
+    }
+
+    @GetMapping("/{clubId}/weekly")
+    @Operation(summary = "클럽 주간 통계 조회", description = "클럽 주간 통계를 조회합니다.<br>"
+        + "현재 주부터 12전 주까지의 통계를 순서대로 조회합니다.<br>")
+    public ResponseEntity<?> getWeeklyActiveUserWitClub(@PathVariable String clubId) {
+        int[] metric = clubMetricService.getWeeklyActiveUserWitClub(clubId);
         return Response.ok(metric);
     }
 

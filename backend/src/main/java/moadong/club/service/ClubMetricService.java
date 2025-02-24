@@ -2,6 +2,8 @@ package moadong.club.service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -36,7 +38,6 @@ public class ClubMetricService {
 
     public int[] getDailyActiveUserWitClub(String clubId) {
         LocalDate now = LocalDate.now();
-        //해당 클럽에 대해 30일 전까지의 통계를 모두 불러온다
         LocalDate from = now.minusDays(30);
         List<ClubMetric> metrics = clubMetricRepository.findByClubIdAndDateAfter(clubId, from);
 
@@ -49,5 +50,26 @@ public class ClubMetricService {
         }
 
         return dailyMetric;
+    }
+
+    public int[] getWeeklyActiveUserWitClub(String clubId) {
+        LocalDate now = LocalDate.now();
+        LocalDate from = now.minusDays(84);
+        List<ClubMetric> metrics = clubMetricRepository.findByClubIdAndDateAfter(clubId, from);
+
+        //12주간의 통계를 주별로 나누어 저장할 배열
+        int[] weeklyMetric = new int[12];
+        LocalDate nowMonday = now.with(ChronoField.DAY_OF_WEEK, 1);
+        for (ClubMetric metric : metrics) {
+            LocalDate metricMonday = metric.getDate()
+                .with(ChronoField.DAY_OF_WEEK, 1); // metric의 해당 주 월요일
+            int weeksAgo = (int) ChronoUnit.WEEKS.between(metricMonday, nowMonday);
+
+            if (weeksAgo >= 0 && weeksAgo < 12) {
+                weeklyMetric[weeksAgo]++;
+            }
+        }
+
+        return weeklyMetric;
     }
 }
