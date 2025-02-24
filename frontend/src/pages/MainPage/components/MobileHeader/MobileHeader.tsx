@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Styled from './MainMobileHeader.styles';
+import * as Styled from './MobileHeader.styles';
 import MainIcon from '@/assets/images/mainIcon.png';
 import SearchIcon from '@/assets/images/searchIcon.png';
 import { useNavigate } from 'react-router-dom';

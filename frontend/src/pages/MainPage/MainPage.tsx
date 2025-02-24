@@ -9,7 +9,7 @@ import Banner from '@/pages/MainPage/components/Banner/Banner';
 import { BannerImageList } from '@/utils/banners';
 import { Club } from '@/types/club';
 import * as Styled from './MainPage.styles';
-import MainMobileHeader from '@/pages/MainPage/components/MainMobileHeader/MainMobileHeader';
+import MainMobileHeader from '@/pages/MainPage/components/MobileHeader/MobileHeader';
 
 //Todo
 // 1. 검색 기능 추가
