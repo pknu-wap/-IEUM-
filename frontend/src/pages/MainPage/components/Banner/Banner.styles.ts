@@ -8,8 +8,12 @@ export const BannerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 90px;
   position: relative;
+
+  @media (max-width: 500px) {
+    margin-top: 42px;
+  }
 `;
 
 export const BannerWrapper = styled.div<BannerProps>`
@@ -58,14 +62,30 @@ export const ButtonContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   transform: translateY(-50%);
-  z-index: 10;
+  z-index: 1;
 `;
 
 export const SlideButton = styled.button`
-  background-color: transparent;
-  color: black;
-  border: none;
+  width: 60px;
+  height: auto;
   padding: 10px 20px;
-  border-radius: 10px;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  @media (max-width: 500px) {
+    width: 35px;
+    padding: 6px 12px;
+  }
+
+  @media (max-width: 375px) {
+    width: 30px;
+    padding: 4px 8px;
+  }
 `;
