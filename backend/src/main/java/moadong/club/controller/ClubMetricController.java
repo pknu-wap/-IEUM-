@@ -21,7 +21,7 @@ public class ClubMetricController {
 
     @GetMapping("/{clubId}/daily")
     @Operation(summary = "클럽 일간 통계 조회", description = "클럽 일간 통계를 조회합니다.<br>"
-        + "오늘 부터 30일 이내의 통계를 순서대로 조회합니다.")
+        + "오늘부터 30일이내의 통계를 순서대로 조회합니다.")
     public ResponseEntity<?> getDailyActiveUserWitClub(@PathVariable String clubId) {
         int[] metric = clubMetricService.getDailyActiveUserWitClub(clubId);
         return Response.ok(metric);
@@ -29,9 +29,17 @@ public class ClubMetricController {
 
     @GetMapping("/{clubId}/weekly")
     @Operation(summary = "클럽 주간 통계 조회", description = "클럽 주간 통계를 조회합니다.<br>"
-        + "현재 주부터 12전 주까지의 통계를 순서대로 조회합니다.<br>")
+        + "현재주부터 12주전까지의 통계를 순서대로 조회합니다.<br>")
     public ResponseEntity<?> getWeeklyActiveUserWitClub(@PathVariable String clubId) {
         int[] metric = clubMetricService.getWeeklyActiveUserWitClub(clubId);
+        return Response.ok(metric);
+    }
+
+    @GetMapping("/{clubId}/monthly")
+    @Operation(summary = "클럽 월간 통계 조회", description = "클럽 월간 통계를 조회합니다.<br>"
+        + "현재월부터 12개월전까지의 통계를 순서대로 조회합니다.<br>")
+    public ResponseEntity<?> getMonthlyActiveUserWitClub(@PathVariable String clubId) {
+        int[] metric = clubMetricService.getMonthlyActiveUserWitClub(clubId);
         return Response.ok(metric);
     }
 

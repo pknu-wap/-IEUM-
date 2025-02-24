@@ -2,6 +2,7 @@ package moadong.club.service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.YearMonth;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -71,5 +72,27 @@ public class ClubMetricService {
         }
 
         return weeklyMetric;
+    }
+
+    public int[] getMonthlyActiveUserWitClub(String clubId) {
+        LocalDate now = LocalDate.now();
+        YearMonth currentMonth = YearMonth.from(now); // 현재 년-월
+        YearMonth fromMonth = currentMonth.minusMonths(12); // 12개월 전
+
+        List<ClubMetric> metrics = clubMetricRepository.findByClubIdAndDateAfter(clubId, fromMonth.atDay(1));
+
+        // 12개월간의 통계를 월별로 저장할 배열
+        int[] monthlyMetric = new int[12];
+
+        for (ClubMetric metric : metrics) {
+            YearMonth metricMonth = YearMonth.from(metric.getDate()); // metric이 속한 년-월
+            int monthsAgo = (int) ChronoUnit.MONTHS.between(metricMonth, currentMonth);
+
+            if (monthsAgo >= 0 && monthsAgo < 12) {
+                monthlyMetric[monthsAgo]++;
+            }
+        }
+
+        return monthlyMetric;
     }
 }
